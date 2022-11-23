@@ -93,7 +93,7 @@ void main() {
 
       expect(
         eventsStream,
-        emitsThrough(
+        emits(
           containsPair('event_type', '_session.start'),
         ),
       );
@@ -137,7 +137,7 @@ void main() {
 
         expect(
           eventsStream,
-          emitsThrough(allOf([
+          emits(allOf([
             containsPair('event_type', customEventId),
             containsPair(
               'attributes',

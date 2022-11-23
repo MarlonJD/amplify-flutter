@@ -82,7 +82,7 @@ Future<Stream<Map<String, Object?>>> configureAnalytics(
 
   expect(
     eventsStream,
-    emitsThrough(
+    emits(
       containsPair('event_type', '_session.start'),
     ),
   );
