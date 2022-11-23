@@ -28,8 +28,21 @@ Future<Stream<Map<String, Object?>>> configureAnalytics(
   final Stream<Map<String, Object?>> eventsStream;
 
   await Amplify.addPlugins([
-    AmplifyAuthCognito(),
+    AmplifyAuthCognito(
+      credentialStorage: AmplifySecureStorage(
+        config: AmplifySecureStorageConfig(
+          scope: 'analyticsAuth',
+          macOSOptions: MacOSSecureStorageOptions(useDataProtection: false),
+        ),
+      ),
+    ),
     AmplifyAnalyticsPinpoint(
+      keyValueStore: AmplifySecureStorage(
+        config: AmplifySecureStorageConfig(
+          scope: 'analytics',
+          macOSOptions: MacOSSecureStorageOptions(useDataProtection: false),
+        ),
+      ),
       appLifecycleProvider: appLifecycleProvider,
     ),
     AmplifyAPI(),
